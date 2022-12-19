@@ -1,0 +1,37 @@
+---
+const { title } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title ? `Cyto` : "Cyto"}</title>
+    <link rel="stylesheet" href="index.css" />
+    <meta
+      name="description"
+      content="Cytokinesis application"
+    />
+  </head>
+  <body>
+    <div class="flex flex-col min-h-screen">
+      <header>
+        <h1>Cytokinesis</h1>
+     </header>
+      <main>
+        <div class="p-4 mx-auto max-w-screen-xl">
+          <slot />
+        </div>
+      </main>
+      <footer class="mt-auto bg-gray-200">
+        <div class="px-4 pt-8 pb-4 mx-auto max-w-screen-xl">
+          <h1 class="text-gray-600">
+            {`Copyright \u00A9 ${year} Hasan Ali`}
+          </h1>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

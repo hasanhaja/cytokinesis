@@ -1,15 +1,13 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import App from "../components/App";
+import ReactComponent from "../components/ReactComponent";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <div>Cyto content</div>
+  <App client:load>
+    <h1>Hello from app component</h1>
+    <ReactComponent client:load />
+  </App>
+</BaseLayout>
