@@ -1,13 +1,23 @@
-import { createSignal, ParentProps } from "solid-js";
+import { ParentProps } from "solid-js";
+import Navigator from "./Navigator";
+import Preview from "./Preview";
+import Controls from "./Controls";
 
 const App = (props: ParentProps) => {
-  const [count, setCount] = createSignal(0);
 
   return (
-    <div>
-      <div>{props.children}</div> 
-      <p>Count: {count()}</p>
-      <button onClick={() => setCount(count() + 1)}>Click me</button>
+    <div class="min-h-screen flex flex-row">
+      <div class="bg-slate-400 basis-1/4">
+        <Navigator />
+      </div>
+      <div class="basis-3/4 flex flex-col">
+        <div class="basis-2/3">
+          <Preview>{props.children}</Preview>
+        </div> 
+        <div class="basis-1/3">
+          <Controls />
+        </div>
+      </div>
     </div>
   );
 };

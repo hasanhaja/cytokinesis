@@ -1,6 +1,5 @@
 ---
 const { title } = Astro.props;
-const year = new Date().getFullYear();
 ---
 
 <html lang="en" class="scroll-smooth">
@@ -16,22 +15,8 @@ const year = new Date().getFullYear();
     />
   </head>
   <body>
-    <div class="flex flex-col min-h-screen">
-      <header>
-        <h1>Cytokinesis</h1>
-     </header>
-      <main>
-        <div class="p-4 mx-auto max-w-screen-xl">
-          <slot />
-        </div>
-      </main>
-      <footer class="mt-auto bg-gray-200">
-        <div class="px-4 pt-8 pb-4 mx-auto max-w-screen-xl">
-          <h1 class="text-gray-600">
-            {`Copyright \u00A9 ${year} Hasan Ali`}
-          </h1>
-        </div>
-      </footer>
-    </div>
+    <main>
+      <slot />
+    </main>
   </body>
 </html>
