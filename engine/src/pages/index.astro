@@ -1,11 +1,16 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import App from "../components/App";
-import ReactComponent from "../components/ReactComponent";
+// import ReactComponent from "../components/ReactComponent";
+
+const components = await Astro.glob("../components/ui-components/*.astro");
 ---
 
 <BaseLayout>
   <App client:load>
-    <ReactComponent client:load />
+  {components.map((component) => (
+    <component.default />
+  )
+  )}
   </App>
 </BaseLayout>
