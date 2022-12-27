@@ -5,10 +5,12 @@ export type ComponentSpec = {
 };
 
 // TODO Fix hardcoded paths for vue output
-export const readCompiledOutput = async (path: string): Promise<ComponentSpec[]> => {
+export const readCompiledOutput = async (
+  path: string,
+): Promise<ComponentSpec[]> => {
   const outputs = Deno.readDir(path);
   let specs: ComponentSpec[] = [];
-  
+
   for await (const framework of outputs) {
     const variant = framework.name;
     const componentPath = `${path}/${variant}/src/components`;
@@ -17,7 +19,7 @@ export const readCompiledOutput = async (path: string): Promise<ComponentSpec[]>
     for await (const component of components) {
       const temp = {
         variant,
-        path: `${componentPath}/${component.name}`,
+        path: await Deno.realPath(`${componentPath}/${component.name}`),
         name: `${component.name.split(".")[0]}`,
       };
       specs.push(temp);
@@ -27,19 +29,26 @@ export const readCompiledOutput = async (path: string): Promise<ComponentSpec[]>
   return specs;
 };
 
-const createAstroWrapper = async (spec: ComponentSpec): Promise<void> => {
+const createAstroWrapper = async (
+  target: string,
+  spec: ComponentSpec,
+): Promise<void> => {
   const template = `
   ---
   import ${spec.name} from "${spec.path}";
   ---
   <${spec.name} client:load />
   `;
-  const writeTo = `./components/${spec.name}`;
+  const writeTo = `${target}/${spec.name}`;
   await Deno.mkdir(writeTo, { recursive: true });
-  await Deno.writeTextFile(`${writeTo}/${capitalize(spec.variant)}.astro`, template);
+  await Deno.writeTextFile(
+    `${writeTo}/${capitalize(spec.variant)}.astro`,
+    template,
+  );
 };
 
-const capitalize = (word: string) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
+const capitalize = (word: string) =>
+  `${word.charAt(0).toUpperCase()}${word.slice(1)}`;
 
-export const createAstroOutput = (specs: ComponentSpec[]) => specs.forEach(async (spec) => await createAstroWrapper(spec));
-
+export const createAstroOutput = (target: string, specs: ComponentSpec[]) =>
+  specs.forEach(async (spec) => await createAstroWrapper(target, spec));

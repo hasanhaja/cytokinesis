@@ -8,11 +8,13 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "preprocess": "cd ../preprocessor && deno task process --target ../engine/src/components/ui-components"
   },
   "dependencies": {
     "@astrojs/react": "^1.2.2",
     "@astrojs/solid-js": "^1.2.3",
+    "@astrojs/svelte": "^1.0.2",
     "@astrojs/tailwind": "^2.1.2",
     "@solidjs/router": "^0.5.0",
     "@types/react": "^18.0.21",
@@ -21,6 +23,7 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "solid-js": "^1.4.3",
+    "svelte": "^3.46.4",
     "tailwindcss": "^3.0.24"
   }
 }

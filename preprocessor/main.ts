@@ -3,14 +3,20 @@ import { z } from "https://deno.land/x/zod/mod.ts";
 import { createAstroOutput, readCompiledOutput } from "./lib.ts";
 
 const schema = z.object({
-  target: z.string(),
-  output: z.string(),
+  target: z.string({
+    required_error: "target path is required",
+    invalid_type_error: "target path must be a string",
+  }),
+  output: z.string({
+    required_error: "output path is required",
+    invalid_type_error: "output path must be a string",
+  }),
 });
 
-// createAstroOutput(await readCompiledOutput("./output"));
 try {
-  const args = schema.parse(parse(Deno.args));
-  console.log(args);
+  const { output, target } = schema.parse(parse(Deno.args));
+  createAstroOutput(target, await readCompiledOutput(output));
 } catch (e: any) {
-  console.log(e);
+  console.error(e);
 }
+

@@ -1,5 +1,6 @@
 {
   "tasks": {
-    "start": "deno run --allow-read --allow-write main.ts"
+    "start": "deno run --allow-read --allow-write main.ts",
+    "process": "deno task start --output ./output"
   }
 }
