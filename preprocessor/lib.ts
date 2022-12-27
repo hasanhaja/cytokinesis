@@ -35,6 +35,7 @@ const createAstroWrapper = async (
 ): Promise<void> => {
   const template = `
   ---
+  // AUTO-GENERATED FILE. DO NOT EDIT MANUALLY.
   import ${spec.name} from "${spec.path}";
   ---
   <${spec.name} client:load />
