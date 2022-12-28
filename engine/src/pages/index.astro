@@ -1,15 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import App from "../components/App";
-// import ReactComponent from "../components/ReactComponent";
+import App from "../components/App.astro";
+import Preview from "../components/Preview";
+import Controls from "../components/Controls";
+import NavigationMenu from "../components/NavigationMenu";
+import PreviewComponent from "../components/PreviewComponent";
 
-const components = await Astro.glob("../components/ui-components/MyComponent/*.astro");
+const glob = await Astro.glob("../components/ui-components/**/*.astro");
+const components = glob
+                      .map((component) => [component.file, component])
+                      .map(([path, component]) => [path.split("/").slice(-2), component])
+                      .map(([metadata, component]) => ({...component, name: metadata[0], variant: metadata[1].split(".")[0].toLowerCase()}));
+const componentNames = [...new Set(components.map((component) => component.name))]
+const variants = [...new Set(components.map((component) => component.variant))]
 ---
 
 <BaseLayout>
-  <App client:load>
-  { components.map((component) => (
-    <component.default />
-  )) }
-  </App>
+  <App>
+    <NavigationMenu slot="navigator" componentNames={componentNames} client:load />
+    <Preview slot="preview" variants={variants} client:load>
+    {
+      components.map((component) => <PreviewComponent name={component.name} variant={component.variant} client:load><component.default /></PreviewComponent>)
+    }
+    </Preview>
+    <Controls slot="controls" client:load />
+  </App> 
 </BaseLayout>

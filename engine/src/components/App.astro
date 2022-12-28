@@ -1,0 +1,17 @@
+---
+
+---
+
+<div class="min-h-screen flex flex-row">
+  <div class="bg-slate-400 basis-1/4">
+    <slot name="navigator" />
+  </div>
+  <div class="basis-3/4 flex flex-col">
+    <div class="basis-2/3">
+      <slot name="preview" />
+    </div> 
+    <div class="basis-1/3">
+      <slot name="controls" />
+    </div>
+  </div>
+</div>

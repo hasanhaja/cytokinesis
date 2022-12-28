@@ -1,8 +1,20 @@
-import { ParentProps } from "solid-js";
+import { For, ParentProps } from "solid-js";
+import { selectedVariant, setSelectedVariant } from "../contexts/store.ts";
 
-const Preview = (props: ParentProps) => {
+type PreviewProps = ParentProps & {
+  variants: string[];
+};
+
+const Preview = (props: PreviewProps) => {
   return (
-    <div>{props.children}</div>
+    <div>
+      <select value={selectedVariant()} onChange={(e) => setSelectedVariant(e.target.value)}>
+      <For each={props.variants}>
+      { (variant) => (<option value={variant}>{variant}</option>) }
+      </For>
+      </select>
+      <div>{props.children}</div>
+    </div>
   );
 };
 

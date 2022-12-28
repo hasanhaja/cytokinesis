@@ -1,5 +1,15 @@
-import { createStore } from "solid-js/store";
+import { createEffect, createSignal } from "solid-js";
 
-export const AppStore = createStore({
-  variant: "react",
+const [selectedComponent, setSelectedComponent] = createSignal<string>("");
+const [selectedVariant, setSelectedVariant] = createSignal<string>("");
+
+createEffect(() => {
+  console.log(selectedComponent());
 });
+
+export {
+  selectedComponent,
+  setSelectedComponent,
+  selectedVariant,
+  setSelectedVariant,
+};
