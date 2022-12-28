@@ -13,7 +13,7 @@ export const readCompiledOutput = async (
 
   for await (const framework of outputs) {
     const variant = framework.name;
-    const componentPath = `${path}/${variant}/src/components`;
+    const componentPath = `${path}/${variant === "vue" ? `${variant}/vue3` : variant}/src/components`;
     const components = Deno.readDir(componentPath);
 
     for await (const component of components) {

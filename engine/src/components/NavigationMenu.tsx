@@ -13,7 +13,7 @@ const NavigationMenu = (props: NavigationMenuProps) => {
       <For each={props.componentNames}>
         { (componentName) => (
           <li>
-            <div class={`${selectedComponent() ? "ring-2 ring-slate-800 bg-slate-600 rounded-md text-slate-200 transition" : ""} px-3 py-1`} onClick={() => setSelectedComponent(componentName)}>
+            <div class={`${selectedComponent() === componentName ? "ring-2 ring-slate-800 bg-slate-600 rounded-md text-slate-200 transition" : ""} px-3 py-1`} onClick={() => setSelectedComponent(componentName)}>
               {componentName}
             </div>
           </li>) }

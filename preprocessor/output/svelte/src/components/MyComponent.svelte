@@ -15,7 +15,7 @@
   <p>Count: {count}</p>
   <button
     on:click={(event) => {
-      count = (prev) => prev + 1;
+      count = count + 1;
     }}>Increment</button
   >
 </div>

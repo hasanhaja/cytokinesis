@@ -9,9 +9,10 @@ const Preview = (props: PreviewProps) => {
   return (
     <div>
       <select value={selectedVariant()} onChange={(e) => setSelectedVariant(e.target.value)}>
-      <For each={props.variants}>
-      { (variant) => (<option value={variant}>{variant}</option>) }
-      </For>
+        <option value="" disabled>--Please choose an option--</option>
+        <For each={props.variants}>
+        { (variant) => (<option value={variant}>{variant}</option>) }
+        </For>
       </select>
       <div>{props.children}</div>
     </div>

@@ -13,6 +13,11 @@ import tailwind from "@astrojs/tailwind";
 import svelte from "@astrojs/svelte";
 
 // https://astro.build/config
+import vue from "@astrojs/vue";
+
+// https://astro.build/config
+
+// https://astro.build/config
 export default defineConfig({
-  integrations: [solidJs(), react(), tailwind(), svelte()]
+  integrations: [solidJs(), react(), tailwind(), svelte(), vue()]
 });

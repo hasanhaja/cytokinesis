@@ -20,9 +20,7 @@ export default function MyBasicComponent(props) {
         {count}
       </p>
 
-      <button onClick={(event) => setCount((prev) => prev + 1)}>
-        Increment
-      </button>
+      <button onClick={(event) => setCount(count + 1)}>Increment</button>
     </div>
   );
 }
