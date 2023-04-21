@@ -1,7 +1,12 @@
+import PropLoader from "./PropLoader";
 
 const Controls = () => {
+  
   return (
-    <div>Controller and docs</div>
+    <div>
+      <div>Controller and docs</div>
+      <PropLoader />
+    </div>
   );
 };
 
